@@ -1,0 +1,207 @@
+/*================== adE02 廣告=============================*/
+var ad_source;
+//判定為 html5======
+if(adE02Var[0].type == "html5"){
+
+	//取得 iframe 網址
+	ad_source = adE02Var[0].file;
+	if(ad_source.indexOf('www.ettoday.net/banners/')!=-1){//如果網址為www
+		ad_source = ad_source.replace(/www/g,"cdn1");//將 www 改成 cdn1
+	}
+
+	if(adE02Var[0].clicktag==""){//自動加廣告點擊層
+
+		var oadE02HtmlBig = '<a class="ettodayAdCode" id="adE02Link-'+adE02Var[0].bannerid+'" style="width:'+ adE02Var[1].width +'px;height:'+ adE02Var[1].height +'px" rel="nofollow" href="javascript:void(0)" target="_blank" title="點擊了解詳情"></a><iframe src="'+ ad_source +'" width="'+ adE02Var[1].width +'" height="'+ adE02Var[1].height +'" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" allowtransparency="true"></iframe>'
+
+	}else{//iframe 中要手動加廣告點擊層
+
+		var oadE02HtmlBig = '<iframe src="'+ adE02Var[0].file +'?bid='+ adE02Var[0].bid +'&bannerid='+ adE02Var[0].bannerid +'" width="'+ adE02Var[1].width +'" height="'+ adE02Var[1].height +'" marginwidth="0" marginheight="0" frameborder="0" scrolling="no" allowtransparency="true"></iframe>'
+
+	}
+	
+	var oadE02HtmlSmall = '<a href="//ad.ettoday.net/adclick.php?bid='+ adE02Var[0].bid +'&bannerid='+ adE02Var[0].bannerid +'" target="_blank" rel="nofollow"><img src="'+ adE02Var[2].file +'" width="'+ adE02Var[2].width +'" height="'+ adE02Var[2].height +'" /></a>'
+
+	var myTimer;
+	function CountingDown()
+	{
+	    myTimer -= 1;
+	    document.getElementById('theFinalCountDown').innerHTML= myTimer;
+	    
+	    if(myTimer==0)
+	    {
+		    //時間到執行動作
+		    fnadE02BtnShow(".adE02 .btn_close");//顯示關閉鍵
+	    } else {
+		    //每秒執行一次,showTime()
+	       myCountDown=setTimeout("CountingDown()",1000);
+	    }
+	}
+}
+
+//判定為圖片======	
+if(adE02Var[0].type == "pic"){
+	var oadE02HtmlBig = '<a href="//ad.ettoday.net/adclick.php?bid='+ adE02Var[0].bid +'&bannerid='+ adE02Var[0].bannerid +'" target="_blank" rel="nofollow"><img src="'+ adE02Var[1].file +'" width="'+ adE02Var[1].width +'" height="'+ adE02Var[1].height +'" /></a>'
+
+	var oadE02HtmlSmall = '<a href="//ad.ettoday.net/adclick.php?bid='+ adE02Var[0].bid +'&bannerid='+ adE02Var[0].bannerid +'" target="_blank" rel="nofollow"><img src="'+ adE02Var[2].file +'" width="'+ adE02Var[2].width +'" height="'+ adE02Var[2].height +'" /></a>'
+}
+
+//判定為swf======	
+if(adE02Var[0].type == "swf"){
+	var oadE02HtmlBig = '<embed name="'+ adE02Var[1].nameId +'" src="'+ adE02Var[1].file +'" width="'+ adE02Var[1].width +'" height="'+ adE02Var[1].height +'" wmode="'+ adE02Var[0].wmode +'" type="application/x-shockwave-flash" allowscriptaccess="always" flashVars="clickTAG=//ad.ettoday.net/adclick.php%3Fbid='+ adE02Var[0].bid +'%26bannerid='+ adE02Var[0].bannerid +'" pluginspage="//www.adobe.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></embed>'
+
+	var oadE02HtmlSmall = '<embed name="'+ adE02Var[2].nameId +'" src="'+ adE02Var[2].file +'" width="'+ adE02Var[2].width +'" height="'+ adE02Var[2].height +'" wmode="'+ adE02Var[0].wmode +'" type="application/x-shockwave-flash" allowscriptaccess="always" flashVars="clickTAG=//ad.ettoday.net/adclick.php%3Fbid='+ adE02Var[0].bid +'%26bannerid='+ adE02Var[0].bannerid +'" pluginspage="//www.adobe.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></embed>'
+}
+
+	//左門簾
+	var oadE02HtmlLeft = '<div class="curtain curtain-left"><a href="//ad.ettoday.net/adclick.php?bid='+ adE02Var[0].bid +'&bannerid='+ adE02Var[0].bannerid +'" target="_blank" rel="nofollow"><img src="'+ adE02Var[3].file +'" width="'+ adE02Var[3].width +'" height="'+ adE02Var[3].height +'" /></a></div>';
+
+	//右門簾
+	var oadE02HtmlRight = '<div class="curtain curtain-right"><a href="//ad.ettoday.net/adclick.php?bid='+ adE02Var[0].bid +'&bannerid='+ adE02Var[0].bannerid +'" target="_blank" rel="nofollow"><img src="'+ adE02Var[4].file +'" width="'+ adE02Var[4].width +'" height="'+ adE02Var[4].height +'" /></a></div>';
+		
+
+//寫入容器==========	
+document.write('<div class="adE02" id="'+ adE02Var[0].packId +'" style="width:'+ adE02Var[1].width +'px;"><span class="btn btn_open"></span><span class="btn btn_close"></span><div class="box_b"></div><div class="box_s"></div></div>');
+
+//寫入基礎css==========	
+//document.write('<link href="adE02.css" rel="stylesheet" type="text/css"/>');
+document.write('<link href="//static.ettoday.net/ad/adE02/adE02.css" rel="stylesheet" type="text/css"/>');
+
+//定時關計時器===========
+var adE02Timer
+
+//按鈕狀態===============
+function fnadE02BtnShow(iBtn){
+	$(".adE02 .btn").hide();
+	$(iBtn).show();
+}
+
+//廣告開======================
+function fnadE02AdShow(){
+
+	//大廣告展開次數追蹤
+	ga('create', 'UA-52510577-7', 'auto', {'name': 'expandAD'});//(廣告 / 轟天雷/凱旋門)
+	ga('expandAD.require', 'displayfeatures');
+	ga('expandAD.send', 'pageview');
+	//ga("expandAD.send", "event", "轟天雷/凱旋門", "展開大廣告", "廣告編號："+adE02Var[0].bannerid+"", {'nonInteraction': 1});
+	ga("expandAD.send", "event", "轟天雷/凱旋門 - 素材編號："+adE02Var[0].bannerid+"", "展開大廣告", ""+adE02Var[1].file+"", {'nonInteraction': 0});
+
+	$(".adE02 .box_s").empty().hide();
+	$(".adE02 .box_b").html(oadE02HtmlBig).show();
+/*
+	$(".adE02").height(0).animate({
+		width:adE02Var[1].width,
+		height:adE02Var[1].height
+	},1000);
+*/
+	$(".adE02").height(adE02Var[1].height);
+
+
+	//判定為 html5======
+	if(adE02Var[0].type == "html5"){
+		//$(".curtain").hide(); //關閉門簾
+
+		if(adE02Var[0].clicktag==""){//自動加廣告點擊層
+			var adE02Link = "adE02Link-"+adE02Var[0].bannerid;
+			var ettodayAdLink = document.getElementById(adE02Link);
+			var ettodayAdId = 'bid='+ adE02Var[0].bid +'&bannerid='+ adE02Var[0].bannerid +'';
+			ettodayAdLink.setAttribute("href", '//ad.ettoday.net/adclick.php?'+ ettodayAdId);
+		}
+	}
+
+	//打開後幾秒關
+	if(adE02Var[0].type == "html5"){ //若為 html5 廣告
+		//不自動關閉大廣告
+
+		//執行 CountingDown() 倒數讀秒
+		$(".adE02 .btn").hide();
+		$(".adE02").append('<span id="timedCounter" class="btn"><span id="theFinalCountDown"></span> 秒後可關閉廣告...</span>');
+
+		//顯示倒數秒數
+		myTimer=1;//秒
+		CountingDown();
+
+	} else { 
+		fnadE02BtnShow(".adE02 .btn_close");
+		//打開後幾秒關
+		adE02Timer = setTimeout(function(){
+			fnadE02AdHide();
+		}, 9999999998000);
+		//}, adE02Var[0].timeUp);
+		}
+
+}
+
+//廣告關======================
+function fnadE02AdHide(){
+	clearTimeout(adE02Timer); 
+	//$(".adE02 .box_b").slideUp(1000, function(){
+	$(".adE02 .box_b").show(1000, function(){
+		$(this).empty();
+		$(".adE02 .box_s").html(oadE02HtmlSmall).fadeIn();
+		fnadE02BtnShow(".adE02 .btn_open");
+		//$(".curtain").remove();//移除左右門簾
+	});
+/*
+	$(".adE02").animate({
+		width:adE02Var[2].width,
+		height:adE02Var[2].height
+	},1000);
+*/
+	$(".adE02").height(adE02Var[2].height);
+
+	//判定為 html5======
+	if(adE02Var[0].type == "html5"){
+		//$(".curtain").show(); //打開門簾
+		$("#timedCounter").remove();
+	}
+
+}
+
+//按鈕控制================
+$(".adE02 .btn_open").bind("click", function(){
+	if($(".adE02").queue().length!=0) return;
+	fnadE02AdShow();
+});
+	
+$(".adE02 .btn_close").bind("click", function(){
+	if($(".adE02").queue().length!=0) return;
+	fnadE02AdHide();
+});
+
+//由swf呼叫。檢測cookie
+function fnadE02CheckCookie(){
+	var countName = adE02Var[0].cookieName; //定義cookie名稱
+	var expireName = adE02Var[0].cookieName +"-expire"; //定義記錄效期的cookie名稱
+	
+	if($.cookie(countName)==null){ //先判斷是否已有 cookie 值沒有的話，新增一組 (沒有cookie或cookie到期都會回應null)
+		fnadE02AdShow();
+		var iExpireDate = new Date();
+		iExpireDate.setTime(iExpireDate.getTime() + (2 * 60 * 60 * 1000));// ★cookies 效期為 2 小時 (2018/6/1 改2小時1次)
+		//$.cookie(countName, 1 ,{ expires: 1, path: '/'}); //設定key跟value，一定要下 expires 及 path 參數
+		$.cookie(countName, 1 ,{ expires: iExpireDate, domain: 'ettoday.net', path: '/' }); //設定key跟value，一定要下 expires 及 path 參數
+		$.cookie(expireName, iExpireDate ,{ expires: iExpireDate, domain: 'ettoday.net', path: '/' }); //設定key跟value，一定要下 expires 及 path 參數
+	}else{
+		var countVal = $.cookie(countName); //取得目前cookie值
+		var expireVal = new Date($.cookie(expireName)); //取得記錄效期的cookie值
+		
+		countVal++; //值加1
+		if(countVal< adE02Var[0].cookieLimited+1 ){ //在n次內會執行
+			fnadE02AdShow();
+		}else{
+			fnadE02AdHide();
+		}
+		//$.cookie(countName, countVal,{ expires: 1, path: '/'}); //再寫入，設定key跟value，一定要下 expires 及 path 參數
+		$.cookie(countName, countVal,{ expires: expireVal, domain: 'ettoday.net', path: '/'}); //次數更新到 cookies 中，效期設為第一次的cookies效期
+	}
+}
+
+
+
+//初始化===========
+//$(function(){
+	if (adE02Var[3].width >0) {
+		$(".adE02").append(oadE02HtmlLeft).show(); //插入左門簾
+		$(".adE02").append(oadE02HtmlRight).show(); //插入右門簾
+	}
+	fnadE02CheckCookie();
+//});

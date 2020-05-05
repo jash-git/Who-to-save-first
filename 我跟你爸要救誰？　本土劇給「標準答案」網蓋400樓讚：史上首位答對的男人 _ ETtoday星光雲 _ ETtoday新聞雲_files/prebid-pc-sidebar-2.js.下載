@@ -1,0 +1,50 @@
+//全網_側欄底部 (倒數第二)
+var pbjs = pbjs || {};
+pbjs.que = pbjs.que || [],
+	function(e) {
+		var i, d = window.pbjs,
+			n = e.slotid,
+			s = e.adUnitSizes,
+			t = [{
+				code: n,
+				sizes: s,
+				bids: e.bids
+			}];
+		i = function() {
+			i = function() {};
+			var t = document.getElementById(n + "_frame"),
+				a = t.contentWindow.document;
+			params = d.getAdserverTargetingForAdUnitCode(n), params && params.hb_adid && params.hb_pb && params.hb_pb > e.rp ? d.renderAd(t.contentWindow.document, params.hb_adid) : (t.width = s[0][0], t.height = s[0][1], a.write('<style>body{margin:0;padding:0;}</style>' + e.snippet), a.close())
+		}, d.que.push(function() {
+			d.setConfig({
+				//bidderTimeout: 700,
+				bidderTimeout: 3000,
+				priceGranularity: {
+					buckets: [{
+						min: 0.00,
+						max: 9999.00,
+						increment: .001
+					}]
+				}
+			}), d.addAdUnits(t), d.requestBids({
+				bidsBackHandler: i
+			})
+		})
+	}({
+		slotid: "ettoday-prebid-pc-sidebar-2",
+		//rp: 0.1,
+		rp: 0.04,
+		adUnitSizes: [
+			[300, 250]
+		],
+		bids: [
+			{bidder:'appier',params:{hzid:'WUIeWzOp'}},
+			{bidder: 'appnexus', params: {placementId: '13516946'}},
+			{bidder: 'bridgewell', params: {ChannelID: 'CgUxNjAxNhIBMRoEMjA0MCIHZXR0b2RheSoLCKwCEPoBGgE5IAE'}},
+			{bidder:'criteo',params:{zoneId:'1292433'}},
+			//{bidder:'rtbhouse',params:{region:'prebid-asia',publisherId:'WsOc5I3j7RUchAHLGtto'}},
+			{bidder:'rubicon',params:{accountId:'19338',siteId:'220714',zoneId:'1084534'}}
+		],
+		//snippet: "\u003cscript src=\"//static.ettoday.net/jquery/jquery.js\"\u003e\u003c/script\u003e\r\n\u003cscript src=\"//static.ettoday.net/jquery/jquery.cookie.js\"\u003e\u003c/script\u003e\r\n\u003cdiv id=\"clickforce-2371\" style=\"display:none\"\u003e\u003c/div\u003e\r\n\u003cscript\u003e\r\nvar myCountry = $.cookie(\"et_client_country\"); \r\nif(myCountry==null || (myCountry!=\"CN\" \u0026\u0026 myCountry!=\"cn\")){\r\nvar div = document.getElementById(\"clickforce-2371\");\r\ndiv.innerHTML += \"\u003cins class=clickforceads style=display:inline-block;width:300px;height:250px data-ad-zone=2371\u003e\u003c/ins\u003e\";\r\nvar script = document.createElement(\"script\");\r\nscript.async = true;\r\nscript.src = \"//cdn.doublemax.net/js/init.js\";\r\ndiv.appendChild(script);\r\ndiv.style.display = \"block\";\r\n}\r\n\u003c/script\u003e"
+		snippet: "\u003cscript src=\"//static.ettoday.net/jquery/jquery.js\"\u003e\u003c/script\u003e\r\n\u003cscript src=\"//static.ettoday.net/jquery/jquery.cookie.js\"\u003e\u003c/script\u003e\r\n\u003cdiv id=\"clickforce-2373\" style=\"display:none\"\u003e\u003c/div\u003e\r\n\u003cscript\u003e\r\nvar myCountry = $.cookie(\"et_client_country\"); \r\nif(myCountry==null || (myCountry!=\"CN\" \u0026\u0026 myCountry!=\"cn\")){\r\nvar div = document.getElementById(\"clickforce-2373\");\r\ndiv.innerHTML += \"\u003cins class=clickforceads style=display:inline-block;width:300px;height:250px data-ad-zone=2373\u003e\u003c/ins\u003e\";\r\nvar script = document.createElement(\"script\");\r\nscript.async = true;\r\nscript.src = \"//cdn.doublemax.net/js/init.js\";\r\ndiv.appendChild(script);\r\ndiv.style.display = \"block\";\r\n}\r\n\u003c/script\u003e"
+	});

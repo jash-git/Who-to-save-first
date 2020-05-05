@@ -1,0 +1,22 @@
+/*改位置*/
+.video-js .vjs-overlay-no-background{max-width:33%}
+.video-js .vjs-overlay-top-left{top:5px;left:5px}
+.video-js .vjs-overlay-top{left:50%;margin-left:-16.5%;top:5px}
+.video-js .vjs-overlay-top-right{right:5px;top:5px}
+.video-js .vjs-overlay-right{margin-top:-15px;right:5px;top:50%;-webkit-transform: translateY(-50%);transform: translateY(-50%);}
+.video-js .vjs-overlay-bottom-right{bottom:3.5em;right:5px}
+.video-js .vjs-overlay-bottom{bottom:3.5em;left:50%;margin-left:-16.5%}
+.video-js .vjs-overlay-bottom-left{bottom:3.5em;left:5px}
+.video-js .vjs-overlay-left{left:5px;margin-top:-15px;top:50%;-webkit-transform: translateY(-50%);transform: translateY(-50%);}
+
+
+
+.et_ad_overlay{position: relative; opacity:0.5; filter:alpha(opacity=50); z-index: 999998; transition: opacity .5s; background-color:transparent; padding: 5px; border-radius: 2px;}
+.et_ad_overlay .btn_close{ width: 20px; height: 20px; display: block; font-size:20px; background: #333; color: #ECC546; position: absolute; right: 5px; top:5px; z-index: 999999; cursor: pointer;}
+.et_ad_overlay .btn_close::after{content: '\000D7'; display: inline-block; color: #f5f5f5; font-family: '微軟中黑體' ; font-size: 32px; width: 20px; height: 20px; position: absolute; left: 0px; top:-5px; } 
+.et_ad_overlay img {max-width:100%; height:auto;}
+.et_ad_overlay:hover{opacity:1; filter:alpha(opacity=100);}
+
+@media screen and (max-width:400px) { 
+  .video-js .vjs-overlay-no-background{max-width:20%}
+}

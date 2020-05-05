@@ -1,0 +1,52 @@
+//PC_全網_巨幅(下)@版權宣告下方
+var pbjs = pbjs || {};
+pbjs.que = pbjs.que || [],
+	function(e) {
+		var i, d = window.pbjs,
+			n = e.slotid,
+			s = e.adUnitSizes,
+			t = [{
+				code: n,
+				sizes: s,
+				bids: e.bids
+			}];
+		i = function() {
+			i = function() {};
+			var t = document.getElementById(n + "_frame"),
+				a = t.contentWindow.document;
+			params = d.getAdserverTargetingForAdUnitCode(n), params && params.hb_adid && params.hb_pb && params.hb_pb > e.rp ? d.renderAd(t.contentWindow.document, params.hb_adid) : (t.width = s[0][0], t.height = s[0][1], a.write('<style>body{margin:0;padding:0;}</style>' + e.snippet), a.close())
+		}, d.que.push(function() {
+			d.setConfig({
+				//bidderTimeout: 700,
+				bidderTimeout: 3000,
+				priceGranularity: {
+					buckets: [{
+						min: 0.00,
+						max: 9999.00,
+						increment: .001
+					}]
+				}
+			}), d.addAdUnits(t), d.requestBids({
+				bidsBackHandler: i
+			})
+		})
+	}({
+		slotid: "ettoday-prebid-pc-sidebar-1",
+		//rp: 0.2,
+		rp: 0.06,
+		adUnitSizes: [
+			[300, 250]
+		],
+		bids: [
+			{bidder:'appier',params:{hzid:'WUIeW9Op'}},
+			{bidder: 'appnexus',params: {placementId: '13536695'}},
+			{bidder: 'bridgewell',params: {ChannelID: 'CgUxNjAyOBIBMRoEMjA0MCIHZXR0b2RheSoLCKwCEPoBGgE5IAE'}},
+			{bidder:'criteo',params:{zoneId:'1292433'}},
+			//{bidder:'rtbhouse',params:{region:'prebid-asia',publisherId:'WsOc5I3j7RUchAHLGtto'}},
+			{bidder:'rubicon',params:{accountId:'19338',siteId:'220714',zoneId:'1084532'}}
+		],
+		//snippet: "\u003cscript src=\"https://www.googletagservices.com/tag/js/gpt.js\"\u003e\u003c/script\u003e\r\n\u003cdiv id=\"allsite_300x250_2\" style=\"margin:10px auto;width:300px; height:250px;\"\u003e\r\n\u003cscript type=\"text/javascript\"\u003e\r\n    googletag.defineSlot(\"/12656948/allsite_300x250_2\", [300, 250], \"allsite_300x250_2\").addService(googletag.pubads());\r\n\tgoogletag.pubads().collapseEmptyDivs();\r\n\tgoogletag.pubads().enableSyncRendering();\r\n\tgoogletag.enableServices();\r\n    googletag.display(\"allsite_300x250_2\");\r\n\u003c/script\u003e\r\n\u003c/div\u003e"
+		snippet: "\u003cscript async src=\u0027https://securepubads.g.doubleclick.net/tag/js/gpt.js\u0027\u003e\u003c/script\u003e\r\n\u003cdiv id=\u0027gpt-passback\u0027\u003e\r\n  \u003cscript\u003e\r\n     window.googletag = window.googletag || {cmd: []};\r\n       googletag.cmd.push(function() {\r\n         googletag\r\n           .defineSlot(\u0027/12656948/allsite_300x250_2\u0027, [300, 250], \u0027gpt-passback\u0027)\r\n           .addService(googletag.pubads());\r\n         googletag.enableServices();\r\n         googletag.display(\u0027gpt-passback\u0027);\r\n     });\r\n  \u003c/script\u003e\r\n\u003c/div\u003e"
+		//snippet: '\u003cscript src=\u0027https://www.googletagservices.com/tag/js/gpt.js\u0027\u003e\r\n  googletag.pubads().definePassback(\u0027/12656948/allsite_300x250_2\u0027, [300, 250]).display();\r\n\u003c/script\u003e'
+		//snippet: "\u003cscript type=\"text/javascript\" src=\"https://www.googletagservices.com/tag/js/gpt.js\"\u003e\u003c/script\u003e\r\n\u003cscript\u003e\r\n  var googletag = googletag || {};\r\n  googletag.cmd = googletag.cmd || [];\r\n\u003c/script\u003e\r\n\u003cdiv id=\"allsite_300x250_2\" style=\"margin:10px auto;width:300px; height:250px;\"\u003e\r\n\u003cscript type=\"text/javascript\"\u003e\r\n    googletag.defineSlot(\"/12656948/allsite_300x250_2\", [300, 250], \"allsite_300x250_2\").addService(googletag.pubads());\r\n\tgoogletag.pubads().collapseEmptyDivs();\r\n\tgoogletag.enableServices();\r\n    googletag.display(\"allsite_300x250_2\");\r\n\u003c/script\u003e\r\n\u003c/div\u003e"
+	});

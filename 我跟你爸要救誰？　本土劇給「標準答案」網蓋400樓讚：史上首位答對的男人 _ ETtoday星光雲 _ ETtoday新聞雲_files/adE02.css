@@ -1,0 +1,27 @@
+@charset "utf-8";
+/*================== adE02 廣告=============================*/
+.adE02{ margin:0 auto; height:0px; position:relative;z-index:1 }
+
+.adE02 .btn_open{ display:block; background:url(//static.ettoday.net/ad/adE02/btn_open_close.png) no-repeat left top; width:80px; height:20px; cursor:pointer; position:absolute; right:0; top:0px;  z-index:1;}
+
+.adE02 .btn_close{display:block; background:url(//static.ettoday.net/ad/adE02/btn_open_close.png) no-repeat left -20px; width:80px; height:20px; cursor:pointer; position:absolute; right:0px; top:0px;  z-index:3; }
+
+.adE02 .box_s{ overflow:hidden;}
+
+.adE02 .box_b{ overflow:hidden;}
+
+/*左門簾*/
+.curtain-left {position:absolute;top:0;left:-125px;z-index:9999}
+
+/*右門簾*/
+.curtain-right {position:absolute;top:0;right:-125px;z-index:9999}
+
+/* 以下為 html5 型態專屬樣式*/
+/*大廣告點擊區*/
+.adE02 a.ettodayAdCode {display:block; position:absolute; left:0; top:0; z-index:2; background:rgba(0,0,0,0.0);}
+
+/*大廣告 iframe*/
+.adE02 iframe {position:relative; z-index:1;}
+
+/*倒數讀秒顯示*/
+.adE02 #timedCounter {display:block;width:140px;height:20px;position:absolute; right:0px; top:0px; z-index:999999;color:#fff;background-color:red}

@@ -1,0 +1,20 @@
+
+//首頁圖集======================================================
+$(function(){
+	$(".penname_gallery_1").find(".piece:not(:has(img))").remove();//大圖輪播沒廣告就隱藏
+	$(".penname_gallery_1 .run").bxSlider({
+		captions:true,
+		slideWidth:769,
+		onSliderLoad : function(){
+			$(".penname_gallery_1").css({height:"auto"});
+			$(".penname_gallery_1 .run .piece img").show();
+		}
+	});
+	
+});
+
+//20200319 lazyload 筆名圖片延遲載入
+$(function() {
+    $(".penname_part_pictxt_1 img, .penname_part_pictxt_2 img, .penname_subject img, .penname_part_pictxt_5 img, .penname_part_pictxt_3 img, .penname_part_pictxt_4 img, .penname_news img").lazyload();
+});
+

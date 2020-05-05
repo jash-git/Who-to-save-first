@@ -1,0 +1,124 @@
+/**
+* Rocky
+* create 2019.12.10
+* update 2020.01.17
+* 提供DMP推薦閱讀資料取代小編推薦
+*/
+
+    var et_token = $.cookie("et_token");
+
+    var news_id;//該則新聞ID
+
+    //取得該則新聞ID
+    var meta_arr = Array.prototype.slice.call(document.querySelectorAll("meta"));
+
+    for (m in meta_arr) {       
+        if (meta_arr[m].getAttribute("property") == 'dable:item_id') {
+            news_id = meta_arr[m].getAttribute("content");
+        }
+    }
+
+    var api_url = "https://recsys.ettoday.net/api/v2/sim/"+news_id;
+
+    var ori_recomm = [];
+    var ori_recomm_str = '';
+
+    var arrData = Array.prototype.slice.call(document.querySelectorAll(".part_pictxt_1.recomm-news.clearfix .box_0"));
+    
+    //蒐集該則新聞的推薦新聞列表
+    for (r in arrData) {
+        ori_recomm.push(arrData[r].dataset.recomm);
+    }
+
+    ori_recomm_str = ori_recomm.join('\t');//需傳送給DMP的資料
+    console.log("ori_recomm_str:"+ori_recomm_str);
+    console.log("et_token:"+et_token);
+    console.log("news_id:"+news_id);
+    console.log("api_url:"+api_url);
+
+    //取得api資料
+    var request = $.ajax({
+                      method: "GET",
+                      url: api_url,
+                      headers: {
+                        'Client-ID': et_token,
+                      },
+                      dataType: "json"
+                    });
+
+    request.done(function( recomm_msg, textStatus, jqXHR) {
+        
+        console.log(recomm_msg.sim);
+
+        if (jqXHR.status==200) {
+            
+            var id;
+            var title_s;
+            var title;
+            var url;
+            var img;
+            var b1;
+            var b2;
+
+            //替換小編推薦新聞區塊
+            for (i in recomm_msg.sim) {
+
+                arrData[i].innerHTML = '';
+
+                id = recomm_msg.sim[i].id;
+                title_s = recomm_msg.sim[i].title.substring(0, 24) + "...";
+                title = recomm_msg.sim[i].title;
+                url = recomm_msg.sim[i].url+'?dmp=sim_'+recomm_msg.segment+'_'+news_id;
+                img = recomm_msg.sim[i].img;
+
+                b1 = '<div class="pic"><a href="'+url+'" target="_blank" title="'+title+'"><img src="https://cdn2.ettoday.net/style/star2015/images/lazyload.gif" data-original="'+img+'"  width="200" height="150" alt="'+title+'"></a></div>';
+                b2 = '<div class="box_1"><h3 class="title_a" ><a href="'+url+'" target="_blank" title="'+title+'">'+title_s+'</a></h3></div>';
+
+                arrData[i].innerHTML = b1+b2;
+
+            }
+        }   
+    });//end request done
+
+    //非200狀態將傳送小編推薦新聞資料
+    request.fail(function( jqXHR, textStatus ) {
+
+        console.log("recomm request failed "+jqXHR.status);
+
+        if (jqXHR.status==404) {
+            //固定格式,有疑問請洽dmp
+            var body = {
+                        "event_name": "fetch",
+                        "api": "sim",
+                        "engine": "editor",
+                        "client_id": et_token,
+                        "doc_id": news_id,
+                        "response": ori_recomm_str,
+                        "segment": "web"
+                        };
+
+            console.log(body);
+            
+            var c = new XMLHttpRequest();
+                c.withCredentials = true;
+                c.open("POST", "//dcs.ettoday.net/api/feed/news_recsys_prod_backend_impressions");
+                c.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                c.send(JSON.stringify(body));
+
+
+            //替換小編推薦連結            
+            var e_l1;
+            var e_l2;
+
+            //替換小編推薦新聞連結
+            for (r in arrData) {
+                e_l1 = arrData[r].querySelector(".pic a");
+                e_l2 = arrData[r].querySelector(".box_1 .title_a a");
+
+                e_l1.href = e_l1.href+'?dmp=sim_editor_'+news_id;
+                e_l2.href = e_l2.href+'?dmp=sim_editor_'+news_id;
+            }
+
+        }
+        
+    });//end request fail
